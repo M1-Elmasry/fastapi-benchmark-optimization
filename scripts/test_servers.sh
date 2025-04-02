@@ -1,5 +1,5 @@
-test=$1
-s=$2
+test=$1 # smoke load spike breakpoint
+s=$2 # time to wait between tests
 
 run_tests ()
 {
@@ -21,39 +21,30 @@ run_tests ()
   sleep ${s}
 }
 
+run_servers () {
+  local server_type=$1 # sync or async 
+  echo "------------start ${server_type} server------------"
+  uvicorn servers.${server_type}_server:app --host 127.0.0.1 --port 3000 > logs/${server_type}_server.log 2>&1 &
+  SYNC_SERVER_PID=$!
+
+  sleep 5 # wait for the server to start
+
+  echo -e "\n------------running ${test} tests------------ $(date)\n"
+  run_tests ${server_type}_server_tests.log
+  echo -e "\n------------tests finished------------ $(date)\n"
+
+  echo -e "\n------------stop ${server_type} server------------\n"
+  kill ${SYNC_SERVER_PID}
+
+  sleep 5 # wait for the server to stop
+}
+
 echo -e "\nmake you run this script from the project root directory"
 echo -e "make sure you activate the venv: source .venv/bin/activate\n"
 
 if [ ! -d "logs" ]; then mkdir logs; fi
 
-echo "------------start synchronous server------------"
-uvicorn servers.sync_server:app --host 127.0.0.1 --port 3000 > logs/sync_server.log 2>&1 &
-SYNC_SERVER_PID=$!
-
-sleep 5 # wait for the server to start
-
-echo -e "\n------------running ${test} tests------------ $(date)\n"
-run_tests sync_server_tests.log
-echo -e "\n------------tests finished------------ $(date)\n"
-
-echo -e "\n------------stop synchronous server------------\n"
-kill ${SYNC_SERVER_PID}
-
-sleep 5 # wait for the server to stop
-
-echo "------------start asynchronous server------------"
-uvicorn servers.async_server:app --host 127.0.0.1 --port 3000 > logs/async_server.log 2>&1 &
-ASYNC_SERVER_PID=$!
-
-sleep 5 # wait for the server to start
-
-echo -e "\n------------running ${test} tests------------ $(date)\n"
-run_tests async_server_tests.log
-echo -e "\n------------tests finished------------ $(date)\n"
-
-echo -e "\n------------stop asynchronous server------------\n"
-kill ${ASYNC_SERVER_PID}
-
-sleep 5 # wait for the server to stop
+run_servers "sync"
+run_servers "async"
 
 echo "------------Done :)------------"
