@@ -1,0 +1,18 @@
+[project]
+name = "fastapi-benchmark"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiomysql>=0.2.0",
+    "fastapi>=0.115.12",
+    "gunicorn>=23.0.0",
+    "matplotlib>=3.10.1",
+    "mysql-connector-python>=9.2.0",
+    "numpy>=2.2.4",
+    "pandas>=2.2.3",
+    "scipy>=1.15.2",
+    "seaborn>=0.13.2",
+    "uvicorn>=0.34.0",
+]
