@@ -32,7 +32,7 @@ SYNC_SERVER_PID=$!
 
 sleep 5 # wait for the server to start
 
-echo -e "\n------------running tests------------ $(date)\n"
+echo -e "\n------------running ${test} tests------------ $(date)\n"
 run_tests sync_server_tests.log
 echo -e "\n------------tests finished------------ $(date)\n"
 
@@ -47,7 +47,7 @@ ASYNC_SERVER_PID=$!
 
 sleep 5 # wait for the server to start
 
-echo -e "\n------------running tests------------ $(date)\n"
+echo -e "\n------------running ${test} tests------------ $(date)\n"
 run_tests async_server_tests.log
 echo -e "\n------------tests finished------------ $(date)\n"
 
