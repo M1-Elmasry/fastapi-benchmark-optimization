@@ -5,7 +5,7 @@
   
 3 - create a python virtual env and activate it  
 `uv venv`
-`./.venv/bin/activate.fish`
+`source ./.venv/bin/activate.fish`
   
 4 - install deps  
 `uv pip install -r pyproject.toml`  
