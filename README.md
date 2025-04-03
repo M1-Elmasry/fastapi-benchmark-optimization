@@ -1,7 +1,7 @@
 1 - create database named `test` on your mysql server  
   
 2 - seed dabase with random records  
-`mycli -P <db-server-port> -p <password-for-root-host> -D test < ./db/employees_enlarged.sql`  
+`mycli -P <db-server-port> -u root -p <password-for-root-host> -D test < ./db/employees_enlarged.sql`  
   
 3 - create a python virtual env  
 `uv venv`  
