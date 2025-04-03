@@ -3,8 +3,9 @@
 2 - seed dabase with random records  
 `mycli -P <db-server-port> -u root -p <password-for-root-host> -D test < ./db/employees_enlarged.sql`  
   
-3 - create a python virtual env  
-`uv venv`  
+3 - create a python virtual env and activate it  
+`uv venv`
+`./.venv/bin/activate.fish`
   
 4 - install deps  
 `uv pip install -r pyproject.toml`  
