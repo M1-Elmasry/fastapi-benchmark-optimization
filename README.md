@@ -12,7 +12,7 @@
 5 - run a smoke test to test if everything works fine  
 `bash scripts/run_servers.sh smoke 2`  
   
-if everything works fine, run the main tests  
-`bash scripts/run_servers.sh load 5`  
+7 - if everything works fine, run the main tests  
+` rm -r ./logs && bash scripts/run_servers.sh load 5`  
   
 the above test will take aproximately 42 minutes
