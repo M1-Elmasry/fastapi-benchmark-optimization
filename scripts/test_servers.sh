@@ -46,6 +46,8 @@ echo -e "make sure you activate the venv: source .venv/bin/activate\n"
 
 if [ ! -d "logs" ]; then mkdir logs; fi
 
+uv pip unistall httptools uvloop
+
 run_servers "async"
 
 uv add httptools uvloop
